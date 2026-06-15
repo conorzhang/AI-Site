@@ -9,7 +9,7 @@ export type Work = {
   tone: "blue" | "green" | "lime" | "cyan";
 };
 
-export const basePath = "/enterprise-ux-demo";
+export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/AI-Site";
 
 export const categories = [
   { key: "ERP", name: "企业资源计划", tone: "blue", previewTone: "light", image: `${basePath}/images/category-previews/erp.png` },

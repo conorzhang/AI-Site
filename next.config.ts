@@ -1,8 +1,11 @@
 import type { NextConfig } from "next";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/AI-Site";
+
 const nextConfig: NextConfig = {
   output: "export",
-  basePath: "/enterprise-ux-demo",
+  basePath,
+  assetPrefix: basePath,
   images: {
     unoptimized: true
   }
