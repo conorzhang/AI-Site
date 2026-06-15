@@ -12,14 +12,17 @@ npm run dev -- -p 3000
 本地访问：
 
 ```text
-http://localhost:3000/AI-Site/
+http://localhost:3000/enterprise-ux-demo/
 ```
 
-如需沿用旧子路径调试：
+## GitHub Pages 部署
 
-```bash
-NEXT_PUBLIC_BASE_PATH=/enterprise-ux-demo npm run dev -- -p 3000
-```
+推送到 `main` 会自动构建并发布到 `gh-pages` 分支。
+
+- GitHub 地址：`https://conorzhang.github.io/AI-Site/`
+- CI 构建使用 `basePath=/AI-Site`（与仓库名一致）
+
+**注意：** GitHub Free 账户的私有仓库无法开启 Pages。若需私有仓库 + 在线预览，需 GitHub Pro；或将仓库设为 Public 后在 Settings → Pages 启用 `gh-pages` 分支。
 
 ## 构建
 

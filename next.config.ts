@@ -1,6 +1,6 @@
 import type { NextConfig } from "next";
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/AI-Site";
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/enterprise-ux-demo";
 
 const nextConfig: NextConfig = {
   output: "export",
