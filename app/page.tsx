@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { basePath, categories, cues, strengths, timeline, Work, works } from "@/data/works";
 import { IconGlyph } from "@/components/IconGlyph";
 import { MagneticButton } from "@/components/MagneticButton";
@@ -24,17 +24,52 @@ const stagger = {
 };
 
 const cueIcons = ["video", "modal", "scroll", "layers", "magnet", "transition"] as const;
+const loopCategories = [...categories, ...categories, ...categories];
 
 export default function Home() {
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const carouselReadyRef = useRef(false);
   const dragState = useRef({ active: false, startX: 0, scrollLeft: 0 });
   const { scrollYProgress } = useScroll();
   const heroGlowY = useTransform(scrollYProgress, [0, 0.24], [0, 92]);
   const heroScreenY = useTransform(scrollYProgress, [0, 0.24], [0, -54]);
 
+  function getCarouselSegmentWidth() {
+    const node = carouselRef.current;
+    if (!node) return 0;
+    return node.scrollWidth / 3;
+  }
+
+  function getCarouselStep() {
+    const node = carouselRef.current;
+    if (!node) return 186;
+    const card = node.querySelector<HTMLElement>(".category-card");
+    if (!card) return 186;
+    const gap = Number.parseFloat(getComputedStyle(node).columnGap || getComputedStyle(node).gap || "18");
+    return card.offsetWidth + gap;
+  }
+
+  function normalizeCarouselScroll() {
+    const node = carouselRef.current;
+    if (!node || !carouselReadyRef.current) return;
+
+    const segment = getCarouselSegmentWidth();
+    if (segment <= 0) return;
+
+    if (node.scrollLeft < segment) {
+      node.scrollLeft += segment;
+    } else if (node.scrollLeft >= segment * 2) {
+      node.scrollLeft -= segment;
+    }
+  }
+
   function scrollCarousel(direction: "prev" | "next") {
-    carouselRef.current?.scrollBy({ left: direction === "next" ? 360 : -360, behavior: "smooth" });
+    const node = carouselRef.current;
+    if (!node) return;
+    const step = getCarouselStep();
+    node.scrollBy({ left: direction === "next" ? step : -step, behavior: "smooth" });
+    window.setTimeout(() => normalizeCarouselScroll(), 420);
   }
 
   function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
@@ -54,7 +89,51 @@ export default function Home() {
     const node = carouselRef.current;
     dragState.current.active = false;
     if (node?.hasPointerCapture(event.pointerId)) node.releasePointerCapture(event.pointerId);
+    requestAnimationFrame(() => normalizeCarouselScroll());
   }
+
+  useLayoutEffect(() => {
+    const node = carouselRef.current;
+    if (!node) return;
+
+    const setToMiddle = () => {
+      const segment = node.scrollWidth / 3;
+      if (segment <= 0) return false;
+      node.scrollLeft = segment;
+      carouselReadyRef.current = true;
+      return true;
+    };
+
+    let resizeObserver: ResizeObserver | undefined;
+
+    if (!setToMiddle()) {
+      resizeObserver = new ResizeObserver(() => {
+        if (setToMiddle()) resizeObserver?.disconnect();
+      });
+      resizeObserver.observe(node);
+    }
+
+    const onResize = () => {
+      if (!carouselReadyRef.current) return;
+      normalizeCarouselScroll();
+    };
+
+    window.addEventListener("resize", onResize);
+    return () => {
+      resizeObserver?.disconnect();
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
+
+  useEffect(() => {
+    const node = carouselRef.current;
+    if (!node) return;
+
+    const onScrollEnd = () => normalizeCarouselScroll();
+    node.addEventListener("scrollend", onScrollEnd);
+
+    return () => node.removeEventListener("scrollend", onScrollEnd);
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -149,14 +228,15 @@ export default function Home() {
               <IconGlyph name="arrow" className="arrow-left" />
             </button>
             <div className="category-track" ref={carouselRef} onPointerDown={handlePointerDown} onPointerMove={handlePointerMove} onPointerUp={stopDrag} onPointerCancel={stopDrag}>
-              {categories.map((item, index) => (
-                <motion.article className={`category-card tone-${item.tone} preview-${item.previewTone}`} key={item.key} variants={reveal}>
+              {loopCategories.map((item, index) => (
+                <motion.article
+                  className={`category-card tone-${item.tone} preview-${item.previewTone}`}
+                  data-category={item.key}
+                  key={`${item.key}-${index}`}
+                  variants={reveal}
+                >
                   <div className="category-preview">
-                    <img src={item.image} alt={`${item.key} ${item.name} 预览截图`} className="category-preview-image" />
-                    <div className="category-card-caption">
-                      <h2>{item.key}</h2>
-                      <p>{item.name}</p>
-                    </div>
+                    <img src={item.image} alt="" className="category-preview-image" />
                     <div className="preview-scan" />
                   </div>
                 </motion.article>
@@ -171,7 +251,7 @@ export default function Home() {
 
           <motion.section className="interaction-cues section-wrap" variants={stagger} initial="hidden" animate="visible">
             {cues.map(([title, label], index) => (
-              <motion.div className="cue-item" variants={reveal} key={title}>
+              <motion.div className="cue-item" variants={reveal} key={`cue-${index}`}>
                 <IconGlyph name={cueIcons[index]} className="cue-icon" />
                 <div>
                   <b>{title}</b>

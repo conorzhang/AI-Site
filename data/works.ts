@@ -12,22 +12,22 @@ export type Work = {
 export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/enterprise-ux-demo";
 
 export const categories = [
-  { key: "ERP", name: "企业资源计划", tone: "blue", previewTone: "light", image: `${basePath}/images/category-previews/erp.png` },
-  { key: "CRM", name: "客户关系管理", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/crm.png` },
-  { key: "HR", name: "人力资源管理", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/hr.png` },
-  { key: "OA", name: "协同办公系统", tone: "lime", previewTone: "light", image: `${basePath}/images/category-previews/oa.png` },
-  { key: "SCM", name: "供应链管理", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/scm.png` },
-  { key: "PM", name: "项目管理", tone: "blue", previewTone: "light", image: `${basePath}/images/category-previews/pm.png` },
-  { key: "Dashboard", name: "数据可视化看板", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/dashboard.png` }
+  { key: "ERP", label: "业务对象建模", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/erp.png` },
+  { key: "CRM", label: "页面结构建模", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/crm.png` },
+  { key: "HR", label: "组件配置与交互", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/hr.png` },
+  { key: "OA", label: "AI增强能力", tone: "lime", previewTone: "dark", image: `${basePath}/images/category-previews/oa.png` },
+  { key: "SCM", label: "设计变量体系", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/scm.png` },
+  { key: "PM", label: "系统模板中心", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/pm.png` },
+  { key: "Dashboard", label: "数据可视化看板", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/dashboard.png` }
 ];
 
 export const cues = [
-  ["HOVER VIDEO PREVIEW", "悬停视频预览"],
-  ["MODAL CASE PREVIEW", "案例模态预览"],
-  ["SCROLL REVEAL", "滚动动画呈现"],
-  ["PARALLAX LAYERS", "视差层次背景"],
-  ["CARD TILT / MAGNETIC", "卡片倾斜吸附"],
-  ["SMOOTH TRANSITIONS", "顺滑切换过渡"]
+  ["业务对象建模", "定义可计算的数据模型体系"],
+  ["页面结构建模", "构建数据驱动的页面组织方式"],
+  ["组件配置与交互", "驱动组件行为与状态联动逻辑"],
+  ["AI增强能力", "提升构件效率与智能化能力"],
+  ["设计变量体系", "统一跨端视觉与交互规范"],
+  ["系统模板中心", "沉淀可复用的行业系统结构"]
 ];
 
 export const works: Work[] = [
