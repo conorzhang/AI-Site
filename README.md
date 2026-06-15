@@ -33,10 +33,29 @@ npm run build
 
 仓库已配置 GitHub Actions（`.github/workflows/deploy-pages.yml`）。
 
-- 推送到 `main` 分支会自动构建并部署
-- 访问地址：`https://conorzhang.github.io/AI-Site/`
+- 推送到 `main` 会自动构建，并发布到 `gh-pages` 分支
+- 预期访问地址：`https://conorzhang.github.io/AI-Site/`
 
-也可在 GitHub 仓库 **Actions** 页手动触发 `Deploy GitHub Pages`。
+### 首次启用 Pages
+
+私有仓库需要 **GitHub Pro** 才能使用 GitHub Pages（Free 账户仅支持公开仓库）。
+
+开通后：
+
+1. 打开仓库 **Settings → Pages**
+2. **Build and deployment → Source** 选择 `Deploy from a branch`
+3. **Branch** 选 `gh-pages`，目录选 `/ (root)`
+4. 保存后等待 1–2 分钟生效
+
+也可在 **Actions** 页手动触发 `Deploy GitHub Pages`。
+
+### 本地子路径
+
+默认 `basePath` 为 `/AI-Site`。沿用 `chohn.top` 子路径构建：
+
+```bash
+NEXT_PUBLIC_BASE_PATH=/enterprise-ux-demo NEXT_PUBLIC_SITE_URL=https://chohn.top/enterprise-ux-demo npm run build
+```
 
 ## 技术栈
 
