@@ -23,7 +23,7 @@ const stagger = {
   }
 };
 
-const cueIcons = ["video", "modal", "scroll", "layers", "magnet", "transition"] as const;
+const cueIcons = ["entity", "modal", "component", "ai", "style", "template"] as const;
 const loopCategories = [...categories, ...categories, ...categories];
 
 export default function Home() {
@@ -153,11 +153,11 @@ export default function Home() {
         <motion.nav className="navbar" initial={{ opacity: 0, y: -22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
           <a href="#top" className="brand">
             <strong>Chohn</strong>
-            <span>/ Product Designer</span>
+            <span>/ AI 产品经理 / ToB 平台产品</span>
           </a>
           <div className="nav-links">
-            <a href="#selected-works">工作案例</a>
-            <a href="#about">个人经历</a>
+            <a href="#selected-works">项目案例</a>
+            <a href="#about">工作经历</a>
             <a href="#contact">联系方式</a>
           </div>
           <MagneticButton href="#contact" className="nav-cta">
@@ -194,12 +194,12 @@ export default function Home() {
                 </span>
               </motion.h1>
               <motion.p className="hero-subtitle" variants={reveal}>
-                面向企业解决方案的交互设计与作品展示
+                低代码能力建设与 AI 辅助方案
               </motion.p>
               <motion.p className="hero-description" variants={reveal}>
-                专注 ToB 企业级系统的交互设计与体验优化
+                专注 ToB 产品设计，覆盖应用构建、组件功能配置、企业主题定制与 AI 场景落地。
                 <br />
-                低代码平台实践 · 组件化模板沉淀 · 高效敏捷的设计交付
+                深耕低代码平台实践，沉淀系统模板资产，驱动高效敏捷的设计交付。
               </motion.p>
               <motion.div className="scroll-cue" variants={reveal}>
                 <svg className="scroll-cue-icon" viewBox="0 0 32 32" fill="none" aria-hidden>
@@ -262,11 +262,13 @@ export default function Home() {
           </motion.section>
         </section>
 
+        <LegacyProjectShowcase />
+
         <motion.section id="selected-works" className="section-wrap selected-section" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }}>
           <motion.div className="section-heading" variants={reveal}>
             <h2>
-              SELECTED WORKS <em>/</em>
-              <span>解决方案案例</span>
+              SELECTED WORKS &amp; OUTCOMES <em>/</em>
+              <span>产品方案与落地成果</span>
             </h2>
             <MagneticButton href="#selected-works" variant="ghost">
               查看全部案例
@@ -277,7 +279,11 @@ export default function Home() {
               <motion.div key={work.id} variants={reveal}>
                 <TiltCard className="work-card" label={`打开 ${work.title} 案例预览`} onClick={() => setSelectedWork(work)}>
                   <div className="work-preview" data-video-path={`${basePath}${work.videoPath}`}>
-                    <MockEnterpriseScreen work={work} compact />
+                    {work.previewImage ? (
+                      <img src={work.previewImage} alt="" className="work-preview-image" />
+                    ) : (
+                      <MockEnterpriseScreen work={work} compact />
+                    )}
                     <span className="video-shimmer" />
                     <span className="work-play">
                       <IconGlyph name="play" />
@@ -302,14 +308,14 @@ export default function Home() {
             <h2>
               Hi, I am <span>Chohn!</span>
             </h2>
-            <h3>ToB 交互设计师 &amp; 企业解决方案设计专家</h3>
-            <p>拥有 5+ 年企业级产品设计经验，专注于 ERP、CRM、HR、OA、供应链、项目管理与数据可视化等领域。</p>
-            <p>擅长将复杂业务抽象为高效的产品体验，沉淀可复用的模板与组件体系，助力企业数字化升级。</p>
+            <h3>AI 产品经理 / ToB 平台产品经理</h3>
+            <p>具备 5 年以上 ToB 平台与低代码产品经验，长期参与企业级组件库、低代码设计器、主题体系、国际化适配和 AI 助手方案建设。</p>
+            <p>擅长把复杂业务需求拆解为对象模型、页面结构、流程规则、组件配置与可交付的产品方案。</p>
             <div className="stats-row">
               {[
-                ["5+", "行业经验"],
-                ["30+", "页面模板"],
-                ["200+", "企业页面资产"]
+                ["5+", "ToB 产品经验"],
+                ["30+", "组件 / 配置能力设计"],
+                ["200+", "工单 / 需求问题沉淀"]
               ].map(([value, label]) => (
                 <div className="stat-item" key={value}>
                   <strong>{value}</strong>
@@ -335,7 +341,7 @@ export default function Home() {
           <motion.div className="section-heading compact-heading" variants={reveal}>
             <h2>
               CORE STRENGTHS <em>/</em>
-              <span>核心优势</span>
+              <span>核心产品能力</span>
             </h2>
           </motion.div>
           <div className="strength-grid">
@@ -359,11 +365,11 @@ export default function Home() {
             <h2>
               LET’S BUILD
               <br />
-              BETTER <span>ENTERPRISE</span>
+              BETTER <span>TOB PRODUCT</span>
               <br />
-              EXPERIENCES
+              SOLUTIONS
             </h2>
-            <MagneticButton href="mailto:chohn_top@qq.com">联系我</MagneticButton>
+            <MagneticButton href="#selected-works">查看项目案例</MagneticButton>
           </motion.div>
           <motion.aside className="contact-card" variants={reveal}>
             <div className="contact-info">
@@ -388,7 +394,7 @@ export default function Home() {
         <footer className="footer section-wrap">
           <a href="#top" className="brand">
             <strong>Chohn</strong>
-            <span>/ Product Designer</span>
+            <span>/ AI Product Manager</span>
           </a>
           <div className="footer-meta">
             <div className="beian-records">
@@ -413,5 +419,222 @@ export default function Home() {
         <WorkPreviewModal work={selectedWork} onClose={() => setSelectedWork(null)} />
       </AnimatePresence>
     </>
+  );
+}
+
+function LegacyProjectShowcase() {
+  const insightItems = [
+    ["问题", "中后台系统的任务状态流转、权限控制与数据密度常因设计不一致导致信息层级混乱，用户难以快速定位高风险项。"],
+    ["方案", "以任务生命周期为主线，设计状态机驱动的表格交互；集成风险洞察面板、批量操作与权限按钮级管控。"],
+    ["输出", "可交互的 TaskTable 原型，支持状态流转、进度可视化、风险分级、RTL 适配与多语言输入验证。"],
+    ["交付", "演示环境隔离、角色切换模拟、规范模式开关与错误态注入，确保设计系统可验证、可复现。"]
+  ];
+
+  return (
+        <motion.section className="section-wrap legacy-projects-section" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }}>
+          <motion.div className="section-heading legacy-heading" variants={reveal}>
+            <h2>
+              ENTERPRISE AI EXPLORATION <em>/</em>
+              <span>企业应用 AI 探索</span>
+            </h2>
+            <MagneticButton href="https://chohn.top/PM-system/" variant="ghost">
+              打开在线演示
+            </MagneticButton>
+          </motion.div>
+
+      <motion.article className="legacy-main-project" variants={reveal}>
+        <div className="legacy-project-copy">
+          <span>原型展示</span>
+          <h3>任务工作台</h3>
+          <p>任务流转闭环、组件状态、权限与 Spec 规则集中演示</p>
+        </div>
+        <div className="legacy-main-layout">
+          <div className="legacy-main-left">
+            <LegacyPmMockup />
+            <div className="legacy-tech-tags">
+              {["React 19", "TypeScript", "Ant Design", "Zustand", "Mock Service Worker"].map((tag) => (
+                <span key={tag}>{tag}</span>
+              ))}
+            </div>
+          </div>
+          <div className="legacy-insight-list">
+            {insightItems.map(([title, text]) => (
+              <div className="legacy-insight-card" key={title}>
+                <h4>{title}</h4>
+                <p>{text}</p>
+              </div>
+            ))}
+            <a href="https://chohn.top/PM-system/" className="legacy-open-link">
+              打开任务工作台
+              <IconGlyph name="arrow" />
+            </a>
+          </div>
+        </div>
+      </motion.article>
+
+      <motion.div className="legacy-secondary-grid" variants={stagger}>
+        <LegacyToolCard
+          title="JD 智能分析"
+          subtitle="职位描述智能分析"
+          description="通过规则脚本解析摘要，接入语义识别与企业认证 API，完成信息抽取、风险提示与可信度校验。"
+          tags={["AI PM", "岗位分类", "风险提示", "企业审计"]}
+          href="https://chohn.top/jd-analyzer/"
+          tone="green"
+        />
+        <LegacyToolCard
+          title="AI 提取文字"
+          subtitle="招聘截图 OCR 识别"
+          description="过滤 UI 噪声，输出结构化文本供下游分析，支持稳定化部署与规则兜底。"
+          tags={["PP-OCRv5", "噪声过滤", "规则兜底"]}
+          href="https://chohn.top/stable-ocr/"
+          tone="cyan"
+        />
+      </motion.div>
+    </motion.section>
+  );
+}
+
+function LegacyPmMockup() {
+  const rows = [
+    ["待开始", "高", "SL", "12%", "中"],
+    ["进行中", "高", "LY", "0%", "高"],
+    ["待验收", "中", "MC", "82%", "中"],
+    ["已完成", "中", "OA", "100%", "低"],
+    ["进行中", "低", "OA", "36%", "低"]
+  ];
+
+  return (
+    <div className="legacy-browser legacy-pm-browser">
+      <div className="legacy-browser-chrome">
+        <span />
+        <span />
+        <span />
+        <b>chohn.top/PM-system/</b>
+      </div>
+      <div className="legacy-pm-app">
+        <div className="legacy-pm-topbar">
+          <div>
+            <i>项</i>
+            <b>项目管理系统</b>
+          </div>
+          <span>风险 2</span>
+        </div>
+        <div className="legacy-pm-body">
+          <div className="legacy-pm-sidebar">
+            {["⌂", "◈", "○", "◎"].map((item, index) => (
+              <span className={index === 0 ? "active" : ""} key={item}>
+                {item}
+              </span>
+            ))}
+          </div>
+          <div className="legacy-pm-content">
+            <div className="legacy-pm-stats">
+              {[
+                ["任务总数", "12"],
+                ["进行中", "3"],
+                ["待验收", "2"],
+                ["高风险", "2"]
+              ].map(([label, value]) => (
+                <div key={label}>
+                  <small>{label}</small>
+                  <strong>{value}</strong>
+                </div>
+              ))}
+            </div>
+            <div className="legacy-pm-head">
+              <div>
+                <b>任务工作台</b>
+                <span>任务流转闭环、组件状态、权限和 Spec 规则集中演示</span>
+              </div>
+              <button>+ 新建</button>
+            </div>
+            <div className="legacy-pm-grid">
+              <div className="legacy-pm-table">
+                <div className="legacy-pm-table-head">
+                  <span>任务列表</span>
+                  <i>☰</i>
+                </div>
+                {rows.map(([status, priority, user, progress, risk], index) => (
+                  <div className="legacy-pm-row" key={`${status}-${index}`}>
+                    <span className="fake-line" />
+                    <em className={`status status-${index}`}>{status}</em>
+                    <em>{priority}</em>
+                    <b>{user}</b>
+                    <i style={{ width: progress }}>{progress}</i>
+                    <em>{risk}</em>
+                  </div>
+                ))}
+              </div>
+              <div className="legacy-pm-risk">
+                <b>风险洞察</b>
+                <div>
+                  <span>2</span>
+                  <span>7</span>
+                  <span>0</span>
+                </div>
+                <button>生成提示</button>
+                <p>
+                  <i />
+                  <i />
+                  <i />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function LegacyToolCard({ title, subtitle, description, tags, href, tone }: { title: string; subtitle: string; description: string; tags: string[]; href: string; tone: "green" | "cyan" }) {
+  return (
+    <motion.article className={`legacy-tool-card tone-${tone}`} variants={reveal}>
+      <div className="legacy-browser legacy-tool-browser">
+        <div className="legacy-browser-chrome">
+          <span />
+          <span />
+          <span />
+          <b>{title}</b>
+          <em>online</em>
+        </div>
+        <div className="legacy-tool-body">
+          {tone === "green" ? (
+            <>
+              <div className="legacy-jd-panel">
+                <h4>{subtitle}</h4>
+                <p>{description}</p>
+              </div>
+              <div className="legacy-score-ring">78%</div>
+            </>
+          ) : (
+            <>
+              <div className="legacy-upload-box">拖入招聘截图<br />或工作流上传图片</div>
+              <div className="legacy-ocr-lines">
+                <span />
+                <span />
+                <span />
+                <span />
+                <i />
+              </div>
+            </>
+          )}
+        </div>
+      </div>
+      <div className="legacy-tool-meta">
+        <div>
+          <h3>{title}</h3>
+          <p>{description}</p>
+        </div>
+        <a href={href} aria-label={`打开 ${title}`}>
+          <IconGlyph name="arrow" />
+        </a>
+      </div>
+      <div className="legacy-tech-tags">
+        {tags.map((tag) => (
+          <span key={tag}>{tag}</span>
+        ))}
+      </div>
+    </motion.article>
   );
 }

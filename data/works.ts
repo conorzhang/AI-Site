@@ -6,83 +6,89 @@ export type Work = {
   tags: string[];
   metric: string;
   videoPath: string;
+  previewImage?: string;
   tone: "blue" | "green" | "lime" | "cyan";
 };
 
-export const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "/enterprise-ux-demo";
+const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH;
+export const basePath = configuredBasePath === undefined ? "/enterprise-ux-demo" : configuredBasePath;
 
 export const categories = [
   { key: "ERP", label: "业务对象建模", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/erp.png` },
-  { key: "CRM", label: "页面结构建模", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/crm.png` },
-  { key: "HR", label: "组件配置与交互", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/hr.png` },
-  { key: "OA", label: "AI增强能力", tone: "lime", previewTone: "dark", image: `${basePath}/images/category-previews/oa.png` },
-  { key: "SCM", label: "设计变量体系", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/scm.png` },
-  { key: "PM", label: "系统模板中心", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/pm.png` },
+  { key: "CRM", label: "页面与流程建模", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/crm.png` },
+  { key: "HR", label: "组件能力产品化", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/hr.png` },
+  { key: "OA", label: "AI 助手产品设计", tone: "lime", previewTone: "dark", image: `${basePath}/images/category-previews/oa.png` },
+  { key: "SCM", label: "Design Token / DTS", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/scm.png` },
+  { key: "PM", label: "行业模板与方案沉淀", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/pm.png` },
   { key: "Dashboard", label: "数据可视化看板", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/dashboard.png` }
 ];
 
 export const cues = [
-  ["业务对象建模", "定义可计算的数据模型体系"],
-  ["页面结构建模", "构建数据驱动的页面组织方式"],
-  ["组件配置与交互", "驱动组件行为与状态联动逻辑"],
-  ["AI增强能力", "提升构件效率与智能化能力"],
-  ["设计变量体系", "统一跨端视觉与交互规范"],
-  ["系统模板中心", "沉淀可复用的行业系统结构"]
+  ["业务对象建模", "抽象业务实体、字段、状态、权限与配置关系，支撑低代码系统搭建"],
+  ["页面与流程建模", "梳理列表、详情、编辑、审批、异常处理等页面与流程闭环"],
+  ["组件能力产品化", "定义组件属性、状态、API、浏览态、只读态、国际化等标准能力"],
+  ["AI 助手产品设计", "基于 RAG、Workflow、Agent Skill 设计知识问答与工单辅助处理方案"],
+  ["Design Token / DTS", "推动主题变量、颜色、字号、圆角、间距等跨端一致性与可配置能力"],
+  ["行业模板与方案沉淀", "沉淀表单、列表、卡片、看板等信息化系统模板，降低重复建设成本"]
 ];
 
 export const works: Work[] = [
   {
     id: "erp",
-    title: "ERP 管理系统",
-    subtitle: "一体化资源管理与业务协同",
-    eyebrow: "ENTERPRISE RESOURCE PLANNING",
-    tags: ["采购", "库存", "财务", "审批"],
+    title: "低代码组件知识库 AI 问答",
+    subtitle: "基于 Dify、RAG、Workflow 构建组件知识问答，提升研发与实施问题定位效率",
+    eyebrow: "LOW-CODE COMPONENT KNOWLEDGE QA",
+    tags: ["Dify", "RAG", "Workflow", "知识库"],
     metric: "86%",
     videoPath: "/videos/erp.mp4",
+    previewImage: `${basePath}/images/work-previews/erp.png`,
     tone: "blue"
   },
   {
     id: "crm",
-    title: "CRM 客户管理",
-    subtitle: "客户全生命周期管理",
-    eyebrow: "CUSTOMER RELATIONSHIP MANAGEMENT",
-    tags: ["线索", "商机", "客户", "回款"],
+    title: "工单客服 AI 助手",
+    subtitle: "通过信息抽取、智能归因、历史工单召回与人工审核边界，提升工单流转效率",
+    eyebrow: "AI TICKET SERVICE ASSISTANT",
+    tags: ["工单", "归因", "召回", "审核"],
     metric: "72%",
     videoPath: "/videos/crm.mp4",
+    previewImage: `${basePath}/images/work-previews/crm.png`,
     tone: "green"
   },
   {
     id: "hr",
-    title: "HR 人力资源管理",
-    subtitle: "组织发展与人才管理平台",
-    eyebrow: "HUMAN RESOURCE MANAGEMENT",
-    tags: ["组织", "招聘", "绩效", "人才"],
+    title: "低代码组件平台能力建设",
+    subtitle: "负责 Web / 移动组件需求规划、属性配置、状态规则、API 标准与上线验证",
+    eyebrow: "LOW-CODE COMPONENT PLATFORM",
+    tags: ["组件", "配置", "API", "验证"],
     metric: "64%",
     videoPath: "/videos/hr.mp4",
+    previewImage: `${basePath}/images/work-previews/hr.png`,
     tone: "cyan"
   },
   {
     id: "oa",
-    title: "OA 协同办公",
-    subtitle: "高效协同 · 流程驱动",
-    eyebrow: "OFFICE AUTOMATION",
-    tags: ["流程", "日程", "任务", "文档"],
+    title: "国际化与多端适配方案",
+    subtitle: "推动 RTL 布局、多语言录入、多时区转换、海外项目页面适配等能力落地",
+    eyebrow: "I18N AND MULTI-END ADAPTATION",
+    tags: ["RTL", "多语言", "多时区", "适配"],
     metric: "91%",
     videoPath: "/videos/oa.mp4",
+    previewImage: `${basePath}/images/work-previews/oa.png`,
     tone: "lime"
   }
 ];
 
 export const strengths = [
-  ["完整项目主导能力", "从 0-1 规划与落地，把控体验与商业目标", `${basePath}/images/strength-icons/strength-1.png`, `${basePath}/images/strength-icons/strength-1-green.png`],
-  ["品牌视觉体系搭建", "建立统一的设计语言，提升品牌价值与认知", `${basePath}/images/strength-icons/strength-2.png`, `${basePath}/images/strength-icons/strength-2-green.png`],
-  ["AI 设计提效", "智能工具赋能设计流程，提升效率与质量", `${basePath}/images/strength-icons/strength-3.png`, `${basePath}/images/strength-icons/strength-3-green.png`],
-  ["设计管理统筹", "规范设计流程与资产体系，保障团队高效协同", `${basePath}/images/strength-icons/strength-4.png`, `${basePath}/images/strength-icons/strength-4-green.png`],
-  ["跨部门协同", "深度协作推动项目落地，创造业务价值", `${basePath}/images/strength-icons/strength-5.png`, `${basePath}/images/strength-icons/strength-5-green.png`]
+  ["复杂需求结构化能力", "能将业务诉求拆解为对象、字段、状态、权限、流程、异常与配置规则", `${basePath}/images/strength-icons/strength-1.png`, `${basePath}/images/strength-icons/strength-1-green.png`],
+  ["低代码产品设计", "熟悉表单、列表、子表、组件属性、页面模板、配置面板等低代码核心能力", `${basePath}/images/strength-icons/strength-2.png`, `${basePath}/images/strength-icons/strength-2-green.png`],
+  ["AI 产品 0-1 落地", "设计 RAG 问答、Workflow、Agent Skill、人机协同审核等 AI 产品方案", `${basePath}/images/strength-icons/strength-3.png`, `${basePath}/images/strength-icons/strength-3-green.png`],
+  ["技术理解与研发协同", "能阅读 API 文档，理解前后端实现约束，与研发对齐方案边界和排期风险", `${basePath}/images/strength-icons/strength-4.png`, `${basePath}/images/strength-icons/strength-4-green.png`],
+  ["数据驱动迭代", "基于工单、Bad Case、问答日志、采纳率和重复咨询问题推动持续优化", `${basePath}/images/strength-icons/strength-5.png`, `${basePath}/images/strength-icons/strength-5-green.png`]
 ];
 
 export const timeline = [
-  ["2019.06 - 2021.08", "某软件科技有限公司", "UI/UX 设计师", "负责企业应用产品设计与优化"],
-  ["2021.09 - 2023.11", "某数字科技有限公司", "高级交互设计师", "主导多条产品线设计体系搭建"],
-  ["2023.12 - 至今", "某智能科技有限公司", "设计专家", "负责企业数字化解决方案设计"]
+  ["2016.01 - 2019.06", "易联通达", "交互设计师", "负责新能源充电场景下 APP、车载端与数据大屏的交互设计与信息展示优化。"],
+  ["2019.06 - 2021.08", "基本立子", "产品设计师", "负责物联网设备监控、工程流程数字化产品的需求分析、流程设计、监控看板与异常处置链路方案。"],
+  ["2021.09 - 至今", "用友网络", "产品经理", "负责云平台低代码 Web / 移动组件产品规划、需求评审、方案输出、研发协同、测试验证与上线推进"]
 ];

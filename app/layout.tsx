@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const sitePath = process.env.NEXT_PUBLIC_BASE_PATH || "/enterprise-ux-demo";
+const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH;
+const sitePath = configuredBasePath === undefined ? "/enterprise-ux-demo" : configuredBasePath;
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || `https://chohn.top${sitePath}`;
 
 export const metadata: Metadata = {
-  title: "Chohn / Product Designer",
-  description: "面向企业解决方案的交互设计与作品展示。",
+  title: "Chohn / AI Product Manager",
+  description: "面向企业级低代码、组件平台与 AI 助手的产品方案作品集。",
   metadataBase: new URL(`${siteUrl}/`)
 };
 
