@@ -204,7 +204,7 @@ export default function Home() {
             <span>/ AI 产品经理 / ToB 平台产品</span>
           </a>
           <div className="nav-links">
-            <a href="#selected-works">项目案例</a>
+            <a href="#project-showcase">项目演示</a>
             <a href="#about">工作经历</a>
             <a href="#contact">联系方式</a>
           </div>
@@ -411,7 +411,7 @@ export default function Home() {
               <br />
               SOLUTIONS
             </h2>
-            <MagneticButton href="#selected-works">查看项目案例</MagneticButton>
+            <MagneticButton href="https://chohn.top/PM-system/">查看项目案例</MagneticButton>
           </motion.div>
           <motion.aside className="contact-card" variants={reveal}>
             <div className="contact-info">
@@ -497,7 +497,7 @@ function LegacyProjectShowcase() {
   ];
 
   return (
-        <motion.section className="section-wrap legacy-projects-section" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }}>
+        <motion.section id="project-showcase" className="section-wrap legacy-projects-section" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }}>
           <motion.div className="section-heading legacy-heading" variants={reveal}>
             <h2>
               ENTERPRISE AI EXPLORATION <em>/</em>

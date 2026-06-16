@@ -2091,17 +2091,25 @@ button {
   width: fit-content;
   min-height: 46px;
   padding: 0 22px;
-  border-radius: 8px;
-  background: #12b889;
+  border: 0;
+  border-radius: 999px;
+  background: var(--primary);
   color: #04100c;
   font-size: 14px;
   font-weight: 850;
-  box-shadow: 0 18px 38px rgba(18, 184, 137, 0.18);
+  box-shadow: 0 12px 34px rgba(199, 255, 46, 0.22);
+  transition: transform 180ms ease, box-shadow 240ms ease, background 240ms ease;
+}
+
+.legacy-open-link:hover {
+  background: var(--primary-soft);
+  box-shadow: 0 18px 52px rgba(199, 255, 46, 0.34);
 }
 
 .legacy-open-link svg {
   width: 17px;
   height: 17px;
+  color: #04100c;
 }
 
 .legacy-secondary-grid {
@@ -2234,12 +2242,36 @@ button {
 }
 
 .legacy-ocr-lines i {
+  position: relative;
   justify-self: end;
-  width: 70px;
-  height: 26px;
+  width: 78px;
+  height: 32px;
   border-radius: 999px;
+  background: rgba(236, 252, 246, 0.96);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+}
+
+.legacy-ocr-lines i::before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
   background: #24d9a5;
-  box-shadow: inset 24px 0 rgba(255, 255, 255, 0.9);
+  content: "";
+  box-shadow: 0 0 18px rgba(36, 217, 165, 0.18);
+}
+
+.legacy-ocr-lines i::after {
+  position: absolute;
+  top: -8px;
+  right: -21px;
+  width: 4px;
+  height: 48px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.72);
+  content: "";
 }
 
 .legacy-tool-meta {
@@ -2272,12 +2304,14 @@ button {
   height: 42px;
   border: 1px solid rgba(199, 255, 46, 0.72);
   border-radius: 50%;
+  background: rgba(5, 8, 7, 0.16);
   color: var(--primary);
 }
 
 .legacy-tool-meta a svg {
   width: 18px;
   height: 18px;
+  color: var(--primary);
 }
 
 .works-grid {
