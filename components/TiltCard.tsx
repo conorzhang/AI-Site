@@ -13,6 +13,7 @@ export function TiltCard({ children, className = "", onClick, label }: TiltCardP
   const ref = useRef<HTMLDivElement>(null);
 
   function handleMove(event: React.PointerEvent<HTMLDivElement>) {
+    if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
     const node = ref.current;
     if (!node) return;
     const rect = node.getBoundingClientRect();

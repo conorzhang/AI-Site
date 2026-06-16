@@ -5,7 +5,6 @@ export type Work = {
   eyebrow: string;
   tags: string[];
   metric: string;
-  videoPath: string;
   previewImage?: string;
   tone: "blue" | "green" | "lime" | "cyan";
 };
@@ -14,13 +13,13 @@ const configuredBasePath = process.env.NEXT_PUBLIC_BASE_PATH;
 export const basePath = configuredBasePath === undefined ? "/enterprise-ux-demo" : configuredBasePath;
 
 export const categories = [
-  { key: "ERP", label: "业务对象建模", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/erp.png` },
-  { key: "CRM", label: "页面与流程建模", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/crm.png` },
-  { key: "HR", label: "组件能力产品化", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/hr.png` },
-  { key: "OA", label: "AI 助手产品设计", tone: "lime", previewTone: "dark", image: `${basePath}/images/category-previews/oa.png` },
-  { key: "SCM", label: "Design Token / DTS", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/scm.png` },
-  { key: "PM", label: "行业模板与方案沉淀", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/pm.png` },
-  { key: "Dashboard", label: "数据可视化看板", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/dashboard.png` }
+  { key: "ERP", label: "业务对象建模", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/erp.webp` },
+  { key: "CRM", label: "页面与流程建模", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/crm.webp` },
+  { key: "HR", label: "组件能力产品化", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/hr.webp` },
+  { key: "OA", label: "AI 助手产品设计", tone: "lime", previewTone: "dark", image: `${basePath}/images/category-previews/oa.webp` },
+  { key: "SCM", label: "Design Token / DTS", tone: "green", previewTone: "dark", image: `${basePath}/images/category-previews/scm.webp` },
+  { key: "PM", label: "行业模板与方案沉淀", tone: "blue", previewTone: "dark", image: `${basePath}/images/category-previews/pm.webp` },
+  { key: "Dashboard", label: "数据可视化看板", tone: "cyan", previewTone: "dark", image: `${basePath}/images/category-previews/dashboard.webp` }
 ];
 
 export const cues = [
@@ -40,8 +39,7 @@ export const works: Work[] = [
     eyebrow: "LOW-CODE COMPONENT KNOWLEDGE QA",
     tags: ["Dify", "RAG", "Workflow", "知识库"],
     metric: "86%",
-    videoPath: "/videos/erp.mp4",
-    previewImage: `${basePath}/images/work-previews/erp.png`,
+    previewImage: `${basePath}/images/work-previews/erp.webp`,
     tone: "blue"
   },
   {
@@ -51,8 +49,7 @@ export const works: Work[] = [
     eyebrow: "AI TICKET SERVICE ASSISTANT",
     tags: ["工单", "归因", "召回", "审核"],
     metric: "72%",
-    videoPath: "/videos/crm.mp4",
-    previewImage: `${basePath}/images/work-previews/crm.png`,
+    previewImage: `${basePath}/images/work-previews/crm.webp`,
     tone: "green"
   },
   {
@@ -62,8 +59,7 @@ export const works: Work[] = [
     eyebrow: "LOW-CODE COMPONENT PLATFORM",
     tags: ["组件", "配置", "API", "验证"],
     metric: "64%",
-    videoPath: "/videos/hr.mp4",
-    previewImage: `${basePath}/images/work-previews/hr.png`,
+    previewImage: `${basePath}/images/work-previews/hr.webp`,
     tone: "cyan"
   },
   {
@@ -73,18 +69,17 @@ export const works: Work[] = [
     eyebrow: "I18N AND MULTI-END ADAPTATION",
     tags: ["RTL", "多语言", "多时区", "适配"],
     metric: "91%",
-    videoPath: "/videos/oa.mp4",
-    previewImage: `${basePath}/images/work-previews/oa.png`,
+    previewImage: `${basePath}/images/work-previews/oa.webp`,
     tone: "lime"
   }
 ];
 
 export const strengths = [
-  ["复杂需求结构化能力", "能将业务诉求拆解为对象、字段、状态、权限、流程、异常与配置规则", `${basePath}/images/strength-icons/strength-1.png`, `${basePath}/images/strength-icons/strength-1-green.png`],
-  ["低代码产品设计", "熟悉表单、列表、子表、组件属性、页面模板、配置面板等低代码核心能力", `${basePath}/images/strength-icons/strength-2.png`, `${basePath}/images/strength-icons/strength-2-green.png`],
-  ["AI 产品 0-1 落地", "设计 RAG 问答、Workflow、Agent Skill、人机协同审核等 AI 产品方案", `${basePath}/images/strength-icons/strength-3.png`, `${basePath}/images/strength-icons/strength-3-green.png`],
-  ["技术理解与研发协同", "能阅读 API 文档，理解前后端实现约束，与研发对齐方案边界和排期风险", `${basePath}/images/strength-icons/strength-4.png`, `${basePath}/images/strength-icons/strength-4-green.png`],
-  ["数据驱动迭代", "基于工单、Bad Case、问答日志、采纳率和重复咨询问题推动持续优化", `${basePath}/images/strength-icons/strength-5.png`, `${basePath}/images/strength-icons/strength-5-green.png`]
+  ["复杂需求结构化能力", "能将业务诉求拆解为对象、字段、状态、权限、流程、异常与配置规则", `${basePath}/images/strength-icons/strength-1.webp`, `${basePath}/images/strength-icons/strength-1-green.webp`],
+  ["低代码产品设计", "熟悉表单、列表、子表、组件属性、页面模板、配置面板等低代码核心能力", `${basePath}/images/strength-icons/strength-2.webp`, `${basePath}/images/strength-icons/strength-2-green.webp`],
+  ["AI 产品 0-1 落地", "设计 RAG 问答、Workflow、Agent Skill、人机协同审核等 AI 产品方案", `${basePath}/images/strength-icons/strength-3.webp`, `${basePath}/images/strength-icons/strength-3-green.webp`],
+  ["技术理解与研发协同", "能阅读 API 文档，理解前后端实现约束，与研发对齐方案边界和排期风险", `${basePath}/images/strength-icons/strength-4.webp`, `${basePath}/images/strength-icons/strength-4-green.webp`],
+  ["数据驱动迭代", "基于工单、Bad Case、问答日志、采纳率和重复咨询问题推动持续优化", `${basePath}/images/strength-icons/strength-5.webp`, `${basePath}/images/strength-icons/strength-5-green.webp`]
 ];
 
 export const timeline = [

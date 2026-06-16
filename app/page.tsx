@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { basePath, categories, cues, strengths, timeline, Work, works } from "@/data/works";
 import { IconGlyph } from "@/components/IconGlyph";
@@ -31,9 +31,6 @@ export default function Home() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const carouselReadyRef = useRef(false);
   const dragState = useRef({ active: false, startX: 0, scrollLeft: 0 });
-  const { scrollYProgress } = useScroll();
-  const heroGlowY = useTransform(scrollYProgress, [0, 0.24], [0, 92]);
-  const heroScreenY = useTransform(scrollYProgress, [0, 0.24], [0, -54]);
 
   function getCarouselSegmentWidth() {
     const node = carouselRef.current;
@@ -167,10 +164,10 @@ export default function Home() {
 
         <section id="top" className="hero-section">
           <div className="hero-bg-layer" aria-hidden>
-            <img src={`${basePath}/images/hero-bg.png`} alt="" />
+            <img src={`${basePath}/images/hero-bg.webp`} alt="" fetchPriority="high" decoding="async" />
           </div>
-          <motion.div className="hero-ambient hero-ambient-one" style={{ y: heroGlowY }} />
-          <motion.div className="hero-ambient hero-ambient-two" style={{ y: heroScreenY }} />
+          <div className="hero-ambient hero-ambient-one" />
+          <div className="hero-ambient hero-ambient-two" />
           <div className="mountain-layer" />
           <div className="hero-grid">
             <motion.div className="hero-copy" variants={stagger} initial="hidden" animate="visible">
@@ -216,9 +213,9 @@ export default function Home() {
                 SCROLL TO EXPLORE
               </motion.div>
             </motion.div>
-            <motion.div className="hero-screen-wrap" style={{ y: heroScreenY }} initial={{ opacity: 0, x: 70, rotateY: -12 }} animate={{ opacity: 1, x: 0, rotateY: 0 }} transition={{ duration: 1.05, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}>
+            <motion.div className="hero-screen-wrap" initial={{ opacity: 0, x: 70, rotateY: -12 }} animate={{ opacity: 1, x: 0, rotateY: 0 }} transition={{ duration: 1.05, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}>
               <div className="hero-dashboard-screen screen-floating">
-                <img src={`${basePath}/images/hero-dashboard.png`} alt="企业数据分析后台界面预览" />
+                <img src={`${basePath}/images/hero-dashboard.webp`} alt="企业数据分析后台界面预览" fetchPriority="high" decoding="async" />
               </div>
             </motion.div>
           </div>
@@ -236,7 +233,7 @@ export default function Home() {
                   variants={reveal}
                 >
                   <div className="category-preview">
-                    <img src={item.image} alt="" className="category-preview-image" />
+                    <img src={item.image} alt="" className="category-preview-image" loading="lazy" decoding="async" />
                     <div className="preview-scan" />
                   </div>
                 </motion.article>
@@ -278,9 +275,9 @@ export default function Home() {
             {works.map((work) => (
               <motion.div key={work.id} variants={reveal}>
                 <TiltCard className="work-card" label={`打开 ${work.title} 案例预览`} onClick={() => setSelectedWork(work)}>
-                  <div className="work-preview" data-video-path={`${basePath}${work.videoPath}`}>
+                  <div className="work-preview">
                     {work.previewImage ? (
-                      <img src={work.previewImage} alt="" className="work-preview-image" />
+                      <img src={work.previewImage} alt="" className="work-preview-image" loading="lazy" decoding="async" />
                     ) : (
                       <MockEnterpriseScreen work={work} compact />
                     )}
@@ -302,7 +299,7 @@ export default function Home() {
 
         <motion.section id="about" className="section-wrap about-section" variants={stagger} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-120px" }}>
           <motion.div className="mascot-panel" variants={reveal}>
-            <img src={`${basePath}/images/mascot.png`} alt="Chohn 企业 UX 科技主形象" />
+            <img src={`${basePath}/images/mascot.webp`} alt="Chohn 企业 UX 科技主形象" loading="lazy" decoding="async" />
           </motion.div>
           <motion.div className="about-copy" variants={reveal}>
             <h2>
@@ -351,8 +348,8 @@ export default function Home() {
                   <h3>{title}</h3>
                   <p>{text}</p>
                   <div className="strength-icon-stack" aria-hidden>
-                    <img src={image} alt="" className="strength-icon-art strength-icon-default" />
-                    <img src={hoverImage} alt="" className="strength-icon-art strength-icon-green" />
+                    <img src={image} alt="" className="strength-icon-art strength-icon-default" loading="lazy" decoding="async" />
+                    <img src={hoverImage} alt="" className="strength-icon-art strength-icon-green" loading="lazy" decoding="async" />
                   </div>
                 </TiltCard>
               </motion.div>
@@ -385,7 +382,7 @@ export default function Home() {
               </p>
             </div>
             <div className="qr-box" aria-label="微信扫码联系我">
-              <img src={`${basePath}/images/contact-qr.png`} alt="微信联系我二维码" className="qr-image" />
+              <img src={`${basePath}/images/contact-qr.png`} alt="微信联系我二维码" className="qr-image" loading="lazy" decoding="async" />
               <p>微信扫码联系我</p>
             </div>
           </motion.aside>
@@ -404,7 +401,7 @@ export default function Home() {
                 rel="noreferrer"
                 className="beian-mps-link"
               >
-                <img src={`${basePath}/images/beian-mps-icon.png`} alt="" width={16} height={16} />
+                <img src={`${basePath}/images/beian-mps-icon.png`} alt="" width={16} height={16} loading="lazy" decoding="async" />
                 京公网安备11011402056061号
               </a>
               <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" className="beian-icp-link">
