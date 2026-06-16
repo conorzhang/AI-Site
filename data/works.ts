@@ -39,7 +39,7 @@ export const works: Work[] = [
     eyebrow: "LOW-CODE COMPONENT KNOWLEDGE QA",
     tags: ["Dify", "RAG", "Workflow", "知识库"],
     metric: "86%",
-    previewImage: `${basePath}/images/work-previews/erp.webp`,
+    previewImage: `${basePath}/images/work-previews/oa.webp`,
     tone: "blue"
   },
   {
@@ -69,7 +69,7 @@ export const works: Work[] = [
     eyebrow: "I18N AND MULTI-END ADAPTATION",
     tags: ["RTL", "多语言", "多时区", "适配"],
     metric: "91%",
-    previewImage: `${basePath}/images/work-previews/oa.webp`,
+    previewImage: `${basePath}/images/work-previews/erp.webp`,
     tone: "lime"
   }
 ];
