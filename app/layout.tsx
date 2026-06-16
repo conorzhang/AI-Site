@@ -21,6 +21,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
               "if ('scrollRestoration' in history) history.scrollRestoration = 'manual'; if (!location.hash) window.scrollTo(0, 0);"
           }}
         />
+        <script defer src="https://chohn.top/umi/script.js" data-website-id="db658282-b2f4-4908-a122-b8ae695e938d" />
         {children}
       </body>
     </html>

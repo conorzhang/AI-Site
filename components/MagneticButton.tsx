@@ -9,9 +9,12 @@ type MagneticButtonProps = {
   className?: string;
   onClick?: () => void;
   variant?: "lime" | "ghost";
+  umamiEvent?: string;
+  umamiDemo?: string;
+  umamiSource?: string;
 };
 
-export function MagneticButton({ children, href, className = "", onClick, variant = "lime" }: MagneticButtonProps) {
+export function MagneticButton({ children, href, className = "", onClick, variant = "lime", umamiEvent, umamiDemo, umamiSource }: MagneticButtonProps) {
   const ref = useRef<HTMLAnchorElement | HTMLButtonElement>(null);
 
   function move(event: React.PointerEvent) {
@@ -33,7 +36,16 @@ export function MagneticButton({ children, href, className = "", onClick, varian
 
   if (href) {
     return (
-      <a ref={ref as React.RefObject<HTMLAnchorElement>} href={href} className={classes} onPointerMove={move} onPointerLeave={reset}>
+      <a
+        ref={ref as React.RefObject<HTMLAnchorElement>}
+        href={href}
+        className={classes}
+        data-umami-event={umamiEvent}
+        data-umami-event-demo={umamiDemo}
+        data-umami-event-source={umamiSource}
+        onPointerMove={move}
+        onPointerLeave={reset}
+      >
         <span>{children}</span>
         <IconGlyph name="arrow" className="button-icon" />
       </a>
@@ -41,7 +53,17 @@ export function MagneticButton({ children, href, className = "", onClick, varian
   }
 
   return (
-    <button ref={ref as React.RefObject<HTMLButtonElement>} type="button" className={classes} onClick={onClick} onPointerMove={move} onPointerLeave={reset}>
+    <button
+      ref={ref as React.RefObject<HTMLButtonElement>}
+      type="button"
+      className={classes}
+      data-umami-event={umamiEvent}
+      data-umami-event-demo={umamiDemo}
+      data-umami-event-source={umamiSource}
+      onClick={onClick}
+      onPointerMove={move}
+      onPointerLeave={reset}
+    >
       <span>{children}</span>
       <IconGlyph name="arrow" className="button-icon" />
     </button>

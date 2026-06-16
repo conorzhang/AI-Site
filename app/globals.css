@@ -2244,19 +2244,19 @@ button {
 .legacy-ocr-lines i {
   position: relative;
   justify-self: end;
-  width: 78px;
-  height: 32px;
+  width: 52px;
+  height: 21px;
   border-radius: 999px;
   background: rgba(236, 252, 246, 0.96);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.24);
 }
 
 .legacy-ocr-lines i::before {
   position: absolute;
   top: 0;
   right: 0;
-  width: 32px;
-  height: 32px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   background: #24d9a5;
   content: "";
@@ -2265,10 +2265,10 @@ button {
 
 .legacy-ocr-lines i::after {
   position: absolute;
-  top: -8px;
-  right: -21px;
-  width: 4px;
-  height: 48px;
+  top: -5px;
+  right: -14px;
+  width: 3px;
+  height: 32px;
   border-radius: 999px;
   background: rgba(0, 0, 0, 0.72);
   content: "";
@@ -2305,13 +2305,17 @@ button {
   border: 1px solid rgba(199, 255, 46, 0.72);
   border-radius: 50%;
   background: rgba(5, 8, 7, 0.16);
-  color: var(--primary);
+  color: var(--primary) !important;
 }
 
 .legacy-tool-meta a svg {
   width: 18px;
   height: 18px;
-  color: var(--primary);
+  color: var(--primary) !important;
+}
+
+.legacy-tool-meta a svg path {
+  stroke: var(--primary) !important;
 }
 
 .works-grid {

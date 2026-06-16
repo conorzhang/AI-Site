@@ -204,11 +204,11 @@ export default function Home() {
             <span>/ AI 产品经理 / ToB 平台产品</span>
           </a>
           <div className="nav-links">
-            <a href="#project-showcase">项目演示</a>
-            <a href="#about">工作经历</a>
-            <a href="#contact">联系方式</a>
+            <a href="#project-showcase" data-umami-event="view_project_detail" data-umami-event-source="nav">项目演示</a>
+            <a href="#about" data-umami-event="view_about" data-umami-event-source="nav">工作经历</a>
+            <a href="#contact" data-umami-event="view_contact" data-umami-event-source="nav">联系方式</a>
           </div>
-          <MagneticButton href="#contact" className="nav-cta">
+          <MagneticButton href="#contact" className="nav-cta" umamiEvent="click_contact" umamiSource="nav">
             联系我
           </MagneticButton>
         </motion.nav>
@@ -411,7 +411,9 @@ export default function Home() {
               <br />
               SOLUTIONS
             </h2>
-            <MagneticButton href="https://chohn.top/PM-system/">查看项目案例</MagneticButton>
+            <MagneticButton href="https://chohn.top/PM-system/" umamiEvent="click_pm_system" umamiDemo="pm-system" umamiSource="contact">
+              查看项目案例
+            </MagneticButton>
           </motion.div>
           <motion.aside className="contact-card" variants={reveal}>
             <div className="contact-info">
@@ -503,7 +505,7 @@ function LegacyProjectShowcase() {
               ENTERPRISE AI EXPLORATION <em>/</em>
               <span>企业应用 AI 探索</span>
             </h2>
-            <MagneticButton href="https://chohn.top/PM-system/" variant="ghost">
+            <MagneticButton href="https://chohn.top/PM-system/" variant="ghost" umamiEvent="click_pm_system" umamiDemo="pm-system" umamiSource="legacy-heading">
               打开在线演示
             </MagneticButton>
           </motion.div>
@@ -530,7 +532,13 @@ function LegacyProjectShowcase() {
                 <p>{text}</p>
               </div>
             ))}
-            <a href="https://chohn.top/PM-system/" className="legacy-open-link">
+            <a
+              href="https://chohn.top/PM-system/"
+              className="legacy-open-link"
+              data-umami-event="click_pm_system"
+              data-umami-event-demo="pm-system"
+              data-umami-event-source="main-demo"
+            >
               打开任务工作台
               <IconGlyph name="arrow" />
             </a>
@@ -654,6 +662,9 @@ function LegacyPmMockup() {
 }
 
 function LegacyToolCard({ title, subtitle, description, tags, href, tone }: { title: string; subtitle: string; description: string; tags: string[]; href: string; tone: "green" | "cyan" }) {
+  const eventName = tone === "green" ? "click_jd_analyzer" : "click_stable_ocr";
+  const demoName = tone === "green" ? "jd-analyzer" : "stable-ocr";
+
   return (
     <motion.article className={`legacy-tool-card tone-${tone}`} variants={reveal}>
       <div className="legacy-browser legacy-tool-browser">
@@ -692,7 +703,7 @@ function LegacyToolCard({ title, subtitle, description, tags, href, tone }: { ti
           <h3>{title}</h3>
           <p>{description}</p>
         </div>
-        <a href={href} aria-label={`打开 ${title}`}>
+        <a href={href} aria-label={`打开 ${title}`} data-umami-event={eventName} data-umami-event-demo={demoName} data-umami-event-source="enterprise-ai">
           <IconGlyph name="arrow" />
         </a>
       </div>
