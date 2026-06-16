@@ -2,12 +2,11 @@
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { basePath, categories, cues, strengths, timeline, Work, works } from "@/data/works";
+import { basePath, categories, cues, strengths, timeline, works } from "@/data/works";
 import { IconGlyph } from "@/components/IconGlyph";
 import { MagneticButton } from "@/components/MagneticButton";
 import { MockEnterpriseScreen } from "@/components/MockEnterpriseScreen";
 import { TiltCard } from "@/components/TiltCard";
-import { WorkPreviewModal } from "@/components/WorkPreviewModal";
 
 const reveal = {
   hidden: { opacity: 0, y: 54 },
@@ -27,7 +26,8 @@ const cueIcons = ["entity", "modal", "component", "ai", "style", "template"] as 
 const loopCategories = [...categories, ...categories, ...categories];
 
 export default function Home() {
-  const [selectedWork, setSelectedWork] = useState<Work | null>(null);
+  const [loaderVisible, setLoaderVisible] = useState(true);
+  const [loadProgress, setLoadProgress] = useState(8);
   const carouselRef = useRef<HTMLDivElement>(null);
   const carouselReadyRef = useRef(false);
   const dragState = useRef({ active: false, startX: 0, scrollLeft: 0 });
@@ -123,6 +123,53 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    let pageLoaded = document.readyState === "complete";
+    let minElapsed = false;
+    let closed = false;
+
+    const progressTimer = window.setInterval(() => {
+      setLoadProgress((current) => {
+        if (pageLoaded) return Math.min(current + 8, 96);
+        if (current < 56) return current + 7;
+        if (current < 82) return current + 3;
+        return Math.min(current + 1, 92);
+      });
+    }, 72);
+
+    const closeLoader = () => {
+      if (closed || !pageLoaded || !minElapsed) return;
+      closed = true;
+      window.clearInterval(progressTimer);
+      setLoadProgress(100);
+      window.setTimeout(() => setLoaderVisible(false), 420);
+    };
+
+    const minTimer = window.setTimeout(() => {
+      minElapsed = true;
+      closeLoader();
+    }, 920);
+
+    const handleLoad = () => {
+      pageLoaded = true;
+      closeLoader();
+    };
+
+    if (pageLoaded) {
+      closeLoader();
+    } else {
+      window.addEventListener("load", handleLoad, { once: true });
+    }
+
+    return () => {
+      window.clearInterval(progressTimer);
+      window.clearTimeout(minTimer);
+      window.removeEventListener("load", handleLoad);
+    };
+  }, []);
+
+  useEffect(() => {
     const node = carouselRef.current;
     if (!node) return;
 
@@ -146,6 +193,10 @@ export default function Home() {
 
   return (
     <>
+      <AnimatePresence>
+        {loaderVisible ? <PageLoader progress={loadProgress} /> : null}
+      </AnimatePresence>
+
       <main className="site-shell">
         <motion.nav className="navbar" initial={{ opacity: 0, y: -22 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}>
           <a href="#top" className="brand">
@@ -267,14 +318,11 @@ export default function Home() {
               SELECTED WORKS &amp; OUTCOMES <em>/</em>
               <span>产品方案与落地成果</span>
             </h2>
-            <MagneticButton href="#selected-works" variant="ghost">
-              查看全部案例
-            </MagneticButton>
           </motion.div>
           <div className="works-grid">
             {works.map((work) => (
               <motion.div key={work.id} variants={reveal}>
-                <TiltCard className="work-card" label={`打开 ${work.title} 案例预览`} onClick={() => setSelectedWork(work)}>
+                <TiltCard className="work-card" label={work.title}>
                   <div className="work-preview">
                     {work.previewImage ? (
                       <img src={work.previewImage} alt="" className="work-preview-image" loading="lazy" decoding="async" />
@@ -282,9 +330,6 @@ export default function Home() {
                       <MockEnterpriseScreen work={work} compact />
                     )}
                     <span className="video-shimmer" />
-                    <span className="work-play">
-                      <IconGlyph name="play" />
-                    </span>
                   </div>
                   <div className="work-copy">
                     <h3>{work.title}</h3>
@@ -412,10 +457,34 @@ export default function Home() {
         </footer>
       </main>
 
-      <AnimatePresence>
-        <WorkPreviewModal work={selectedWork} onClose={() => setSelectedWork(null)} />
-      </AnimatePresence>
+      {/* 案例弹窗已按要求下线，卡片仅作静态展示。 */}
     </>
+  );
+}
+
+function PageLoader({ progress }: { progress: number }) {
+  const displayProgress = Math.min(100, Math.max(0, Math.round(progress)));
+
+  return (
+    <motion.div
+      className="page-loader"
+      initial={{ opacity: 1 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0, scale: 1.015 }}
+      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+      aria-live="polite"
+      aria-label={`页面加载 ${displayProgress}%`}
+    >
+      <div className="page-loader-frame">
+        <div className="page-loader-core">
+          <span>LOADING PORTFOLIO</span>
+          <strong>{displayProgress}%</strong>
+        </div>
+        <div className="page-loader-track" aria-hidden>
+          <i style={{ height: `${displayProgress}%` }} />
+        </div>
+      </div>
+    </motion.div>
   );
 }
 
@@ -473,7 +542,7 @@ function LegacyProjectShowcase() {
         <LegacyToolCard
           title="JD 智能分析"
           subtitle="职位描述智能分析"
-          description="通过规则脚本解析摘要，接入语义识别与企业认证 API，完成信息抽取、风险提示与可信度校验。"
+          description="规则脚本解析，模型语义识别，接入企业认证，完成信息抽取、风险提示与可信度校验。"
           tags={["AI PM", "岗位分类", "风险提示", "企业审计"]}
           href="https://chohn.top/jd-analyzer/"
           tone="green"
