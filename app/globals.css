@@ -2264,14 +2264,7 @@ button {
 }
 
 .legacy-ocr-lines i::after {
-  position: absolute;
-  top: -5px;
-  right: -14px;
-  width: 3px;
-  height: 32px;
-  border-radius: 999px;
-  background: rgba(0, 0, 0, 0.72);
-  content: "";
+  content: none;
 }
 
 .legacy-tool-meta {
@@ -2305,17 +2298,17 @@ button {
   border: 1px solid rgba(199, 255, 46, 0.72);
   border-radius: 50%;
   background: rgba(5, 8, 7, 0.16);
-  color: var(--primary) !important;
+  color: #c7ff2e !important;
 }
 
 .legacy-tool-meta a svg {
   width: 18px;
   height: 18px;
-  color: var(--primary) !important;
+  color: #c7ff2e !important;
 }
 
 .legacy-tool-meta a svg path {
-  stroke: var(--primary) !important;
+  stroke: #c7ff2e !important;
 }
 
 .works-grid {
